@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stinky Dungeon RPG</title>
+  <style>
+    #Header {
+      text-align: center;
+      color: white;
+      width: 100%;
+      height: 40px;
+      margin: 0;
+      border: 3px solid black;
+      background-color: black;
+    }
+
+    .speech {
+      position: absolute;
+      width: 100%;
+      bottom: 125px;
+      color: white;
+      font-size: 20px;
+      border: 10px solid white;
+      background-color: black;
+    }
+
+    #Footer {
+      position: absolute;
+      display: block;
+      color: white;
+      width: 100%;
+      bottom: 0;
+      height: 175px;
+      left: 0;
+      z-index: 10;
+      margin: 0;
+      border: 3px solid white;
+    }
+
+    body {
+      background-color: black;
+      font-family: Impact, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      display: block;
+      width: 75%;
+      height: 20%;
+      background-color: white;
+      border: 3px solid black;
+    }
+
+    .choices button {
+      height: 60px;
+      width: 25%;
+      margin: 10px;
+      font-size: 18px;
+      background-color: #444;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .choices button:hover {
+      background-color: #666;
+    }
+
+    .scene img {
+      width: 50%;
+      height: 50%;
+    }
+
+    /* Style for the character images  */
+    #nathanImage {
+      display: none; /* hides image */
+      width: 200px;
+      height: auto;
+      position: absolute;
+      top: 50px; /*adjust positioning of image */
+      left: 20px; 
+      z-index: 5;
+    }
+    #furinaImage {
+      display: none; /* copy of nathan image */
+      width: 200px;
+      height: auto;
+      position: absolute;
+      top: 50px; 
+      left: 20px;
+      z-index: 5;
+    }
+    #chuckImage {
+      display: none; 
+      width: 200px;
+      height: auto;
+      position: absolute;
+      top: 50px; 
+      left: 20px; 
+      z-index: 5;
+    }
+    #jimmyImage {
+      display: none;
+      width: 200px; 
+      height: auto;
+      position: absolute; 
+      top: 50px;
+      left: 20px;
+      z-index: 5;
+    }
+  </style>
+</head>
+  
+<body>
+
+  
+  <h1 id="Header">stinky dungeon rpg</h1>
+
+  <div class="scene">
+    <img src="https://wiki.mabinogiworld.com/images/e/eb/MabiNovel_Background_Rabbie_Dungeon.png" alt="Background Image">
+    <div class="dialogue">
+      <p id="speech" class="speech">Furina is looking for her friends who got trapped in this spooky dungeon. As she explores the cave, she fights various monsters and encounters other people. She meets a tank named Nathan after saving him from a slime that jumped him. </p>
+    </div>
+    <div class="choices">
+      <button id="nextCon" onclick="nextCon()">Continue</button>
+      <button id="nextYes" onclick="nextYes()">Yes</button>
+      <button id="nextNo" onclick="nextNo()">No</button>
+      <button id="fightButt" onclick="fightButt()">START FIGHT</button> 
+    </div>
+  </div>
+
+  <!-- character images that will be shown when a character speaks -->
+  <img id="nathanImage" src="https://tinyurl.com/cwb3ek39" alt="Nathan Image">
+  <img id="furinaImage" src="https://tinyurl.com/5n8yf6v9" alt="Furina Image">
+  <img id="chuckImage" src="https://tinyurl.com/28hfah9k" alt="Chuck Norris Image">
+  <img id="jimmyImage" src="https://tinyurl.com/y74fw85t" alt ="Jimmy Image"> 
+
+  <script>
+    
+    let currentScene = 0; // tracks current scene, helps advance dialogue
+
+    function nextCon() {
+      if (currentScene === 0) {
+        document.getElementById("speech").textContent = "Nathan: Thank you for saving me! If you weren't here, I would've been a goner!";
+        document.getElementById("nathanImage").style.display = "block"; // show Nathan's image
+        currentScene = 1;
+        updateChoices();
+      } else if (currentScene === 1) {
+        document.getElementById("speech").textContent = "Furina: You're Welcome. What are you doing in this dungeon? It's a very dangerous place.";
+        document.getElementById("nathanImage").style.display = "none"; // hide Nathan's image
+        document.getElementById("furinaImage").style.display = "block"; // show furina
+        currentScene = 2;
+        updateChoices();
+      }  else if (currentScene === 2){
+        document.getElementById("speech").textContent = "Nathan: I'm here for my family. I'm helping them pay for our farm.";
+        document.getElementById("nathanImage").style.display = "block"; 
+        document.getElementById("furinaImage").style.display = "none"; //hide her
+        currentScene = 3;
+        updateChoices();
+      }  else if (currentScene === 3){
+        document.getElementById("speech").textContent = "Furina: Oh… I'm here because I'm trying to find my friend that went into this dungeon. Did you happen to see anyone come into this dungeon?";
+        document.getElementById("nathanImage").style.display = "none"; //i think you get the point by now
+        document.getElementById("furinaImage").style.display = "block";
+        currentScene = 4;
+        updateChoices();
+      } else if (currentScene === 4){
+        document.getElementById("speech").textContent = "Nathan: Sorry no I haven't, Nothing but monsters down here. But I can stay from home a little longer to help you find them. Like a little repayment for saving me.";
+        document.getElementById("nathanImage").style.display = "block"; // show Nathan's image again
+        document.getElementById("furinaImage").style.display = "none";
+        currentScene = 5;
+        updateChoices();
+      } else if (currentScene === 5){
+        document.getElementById("speech").textContent = "Do you accept this offer?";
+        document.getElementById("nathanImage").style.display = "none"; 
+        currentScene = 6;
+        updateChoices();
+      } else if (currentScene === 7){
+        document.getElementById("speech").textContent = "Nathan: Thank you, I hope to aid you in this journey.";
+        document.getElementById("nathanImage").style.display = "block";
+        document.getElementById("furinaImage").style.display = "none";
+        currentScene = 9;
+        updateChoices();
+      } else if (currentScene === 9){
+        document.getElementById("speech").textContent = "Suddenly, CHUCK NORRIS APPEARS OUT OF NOWHERE.";
+        document.getElementById("nathanImage").style.display = "none";
+        currentScene = 10;
+        updateChoices();
+      } else if (currentScene === 10){
+        document.getElementById("speech").textContent = "Nathan: HOLY COW! CHUCK NORRIS?";
+        document.getElementById("nathanImage").style.display = "block";
+        currentScene = 11
+        updateChoices();
+      } else if (currentScene === 11){
+        document.getElementById("speech").textContent = "CHUCK NORRIS: IT IS I, CREATOR OF THE UNIVERSE, CARLOS RAY NORRIS, BETTER KNOWN AS CHUCK NORRIS. BOW BEFORE ME MORTALS, OR SUFFER ETERNAL DAMNATION!";
+        document.getElementById("chuckImage").style.display = "block";
+        document.getElementById("nathanImage").style.display = "none";
+        currentScene = 12
+        updateChoices();
+      } else if (currentScene === 12){
+        document.getElementById("speech").textContent = "CHUCK NORRIS: SEEMS YOU TWO ARE STUBBORN. I WILL FIGHT YOU! WITH MY SLIME JIMMY!";
+        currentScene = 13; 
+        updateChoices();
+      } else if (currentScene === 13){
+        document.getElementById("jimmyImage").style.display = "block";
+        document.getElementById("chuckImage").style.display = "none";
+        document.getElementById("speech").textContent = "Jimmy: wahtzup boss.";
+        currentScene = 14;
+        updateChoices();
+      } else if (currentScene === 14){
+        document.getElementById("speech").textContent = "CHUCK NORRIS: JIMMY, HELP ME REMOVE THESE TWO FROM MY SIGHT!";
+        document.getElementById("jimmyImage").style.display = "none";
+        document.getElementById("chuckImage").style.display = "block";
+        currentScene = 15; 
+        updateChoices();
+      } else if (currentScene === 15){
+        document.getElementById("speech").textContent = "Jimmy: ok.";
+        document.getElementById("chuckImage").style.display = "none";
+        document.getElementById("jimmyImage").style.display = "block";
+        currentScene = 16;
+        updateChoices ();
+      } else if (currentScene === 16){
+        document.getElementById("jimmyImage").style.display = "none";
+        document.getElementById("nathanImage").style.display = "block";
+        document.getElementById("speech").textContent = "Nathan: HOLY CRAP I THINK IM GONNA DIE.";
+        currentScene = 17;
+        updateChoices();
+      } else if (currentScene === 17){
+        document.getElementById("nathanImage").style.display = "none";
+        document.getElementById("speech").textContent = "Nathan died.";
+        currentScene = 18;
+        updateChoices();
+      } else if (currentScene === 18){
+        document.getElementById("furinaImage").style.display = "block"; 
+        document.getElementById("speech").textContent = "Furina: Guess I'll have to handle these guys all by myself.";
+        currentScene = 19;
+        updateChoices();
+      }
+    }
+
+    function nextYes() {
+      //add functionality for yes button
+      console.log("Yes clicked!");
+      document.getElementById("speech").textContent = "Furina: Yeah sure! I would really like an extra hand!";
+      document.getElementById("furinaImage").style.display = "block";
+      currentScene = 7;
+      updateChoices();
+    }
+
+    function nextNo() {
+      //functionality for no button
+      console.log("No clicked!");
+      document.getElementById("speech").textContent = "Nathan: ok screw you man, im gonna join your party anyway.";
+      document.getElementById("nathanImage").style.display = "block";
+      currentScene = 7;
+      updateChoices();
+    }
+    function fightButton(){
+      window.location.href = 'https://codepen.io/Kierian-Aren-Bautista/pen/jEOpajd?editors=1010';
+    }
+   
+  </script>
+
+</body>
+</html>
+
